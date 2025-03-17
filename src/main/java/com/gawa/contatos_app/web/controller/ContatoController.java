@@ -39,4 +39,10 @@ public class ContatoController {
         return ResponseEntity.ok(contatoAtualizado);
     }
 
+    @DeleteMapping("/{contato_id}")
+    public ResponseEntity<String> deleteContato(@PathVariable Long contato_id) {
+        String nomeContato = contatoService.deletar(contato_id);
+        return ResponseEntity.ok("Contato '" + nomeContato + "' foi deletado com sucesso.");
+    }
+
 }

@@ -49,4 +49,15 @@ public class ContatoService {
     public List<Contato> buscarTodos() {
         return contatoRepository.findAll();
     }
+
+    @Transactional
+    public String deletar(Long contatoId) {
+        Contato contato = contatoRepository.findById(contatoId)
+                .orElseThrow(() -> new RuntimeException("Contato não encontrado"));
+
+        String nomeContato = contato.getContato_nome();
+        contatoRepository.delete(contato);
+
+        return nomeContato;
+    }
 }

@@ -42,6 +42,15 @@ public class Contato implements Serializable {
     @Column(name = "contato_dh_cad")
     private LocalDateTime contato_dh_cad;
 
+    @PrePersist
+    protected void onCreate() {
+        this.contato_dh_cad = LocalDateTime.now().withSecond(0).withNano(0);
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.contato_dh_cad = LocalDateTime.now().withSecond(0).withNano(0);
+    }
 
     public enum Role {
         S,N
