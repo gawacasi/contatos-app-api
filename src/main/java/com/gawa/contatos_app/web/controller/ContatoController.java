@@ -44,5 +44,4 @@ public class ContatoController {
         String nomeContato = contatoService.deletar(contato_id);
         return ResponseEntity.ok("Contato '" + nomeContato + "' foi deletado com sucesso.");
     }
-
 }
