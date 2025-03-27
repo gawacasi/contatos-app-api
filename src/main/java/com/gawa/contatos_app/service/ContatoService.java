@@ -30,19 +30,33 @@ public class ContatoService {
     }
 
     @Transactional
-    public Contato atualizarParcialmente(Long contatoId, Map<String, Object> updates) {
-        Contato contato = contatoRepository.findById(contatoId)
-                .orElseThrow(() -> new RuntimeException("Contato não encontrado"));
+    public Contato atualizarParcialmente(Long id, Map<String, Object> updates) {
+        Contato contato = contatoRepository.findById(id).orElseThrow(() -> new RuntimeException("Contato não encontrado"));
 
-        updates.forEach((campo, valor) -> {
-            Field field = ReflectionUtils.findField(Contato.class, campo);
-            if (field != null) {
-                field.setAccessible(true);
-                ReflectionUtils.setField(field, contato, valor);
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "contato_sn_favorito":
+                    contato.setContato_sn_favorito(Contato.Role.valueOf(value.toString())); // Converte para Role
+                    break;
+                case "contato_sn_ativo":
+                    contato.setContato_sn_ativo(Contato.Role.valueOf(value.toString())); // Converte para Role
+                    break;
+                case "contato_nome":
+                    contato.setContato_nome(value.toString());
+                    break;
+                case "contato_email":
+                    contato.setContato_email(value.toString());
+                    break;
+                case "contato_celular":
+                    contato.setContato_celular(value.toString());
+                    break;
+                case "contato_telefone":
+                    contato.setContato_telefone(value.toString());
+                    break;
             }
         });
 
-        return contatoRepository.save(contato);
+        return contatoRepository.save(contato); // Salva a entidade atualizada
     }
 
     @Transactional(readOnly = true)
