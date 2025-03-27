@@ -3,6 +3,7 @@ package com.gawa.contatos_app.service;
 import com.gawa.contatos_app.entity.Contato;
 import com.gawa.contatos_app.repository.ContatoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,10 +35,10 @@ public class ContatoService {
         updates.forEach((key, value) -> {
             switch (key) {
                 case "contato_sn_favorito":
-                    contato.setContato_sn_favorito(Contato.Role.valueOf(value.toString())); // Converte para Role
+                    contato.setContato_sn_favorito(Contato.Role.valueOf(value.toString()));
                     break;
                 case "contato_sn_ativo":
-                    contato.setContato_sn_ativo(Contato.Role.valueOf(value.toString())); // Converte para Role
+                    contato.setContato_sn_ativo(Contato.Role.valueOf(value.toString()));
                     break;
                 case "contato_nome":
                     contato.setContato_nome(value.toString());
@@ -54,12 +55,12 @@ public class ContatoService {
             }
         });
 
-        return contatoRepository.save(contato); // Salva a entidade atualizada
+        return contatoRepository.save(contato);
     }
 
     @Transactional(readOnly = true)
     public List<Contato> buscarTodos() {
-        return contatoRepository.findAll();
+        return contatoRepository.findAll(Sort.by(Sort.Order.asc("id")));
     }
 
     @Transactional
