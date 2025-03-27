@@ -3,11 +3,9 @@ package com.gawa.contatos_app.service;
 import com.gawa.contatos_app.entity.Contato;
 import com.gawa.contatos_app.repository.ContatoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 

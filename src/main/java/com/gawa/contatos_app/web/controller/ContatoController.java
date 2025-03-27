@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("api/v1/contatos")
 @CrossOrigin(origins = "http://localhost:4200")
+
 public class ContatoController {
 
     private final ContatoService contatoService;
